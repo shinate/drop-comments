@@ -3,9 +3,6 @@
   "version": "1.0.1",
   "description": "remove comments from file/string",
   "main": "index.js",
-  "scripts": {
-    "test": "karma run"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shinate/drop-comments.git"
