@@ -2,6 +2,14 @@
 
 ## Remove comments from string
 
+## Installation
+
+```bash
+npm install drop-comments
+```
+
+## Useage
+
 ```javascript
 var DC = require('drop-comments');
 
@@ -13,3 +21,5 @@ DC('// comments\nvar a = 1;')
 ```bash
 node ./demo/runthis.js
 ```
+
+*Thanks extract-comments*
