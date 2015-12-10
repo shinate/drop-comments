@@ -1,0 +1,31 @@
+{
+  "name": "drop-comments",
+  "version": "1.0.0",
+  "description": "remove comments from file/string",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shinate/drop-comments.git"
+  },
+  "keywords": [
+    "comments",
+    "clean",
+    "file"
+  ],
+  "author": "shinate",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shinate/drop-comments/issues"
+  },
+  "homepage": "https://github.com/shinate/drop-comments#readme",
+  "dependencies": {
+    "extract-comments": "^0.8.6"
+  },
+  "devDependencies": {
+    "fs": "0.0.2",
+    "strip-comments": "^0.4.1"
+  }
+}
