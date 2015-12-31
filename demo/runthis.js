@@ -8,4 +8,4 @@ console.log('\n\n\n========> strip-comments <===================');
 console.log(SC(content));
 
 console.log('\n\n\n========> drop-comments <====================');
-console.log(DC(content));
+console.log(DC(content, null, {beautify:true}));

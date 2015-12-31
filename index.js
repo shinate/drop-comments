@@ -1,12 +1,44 @@
 'use strict';
 
-var extractComments = require('extract-comments');
 var extend = require('extend-object');
+var espree = require('espree');
 
-var allowedType = ['block', 'line'];
+var allowedType = ['first', 'block', 'line'];
 
 var options = {
-    beautify: true
+    beautify: false
+};
+
+var parseComments = function (content) {
+    var res = {
+        first: [],
+        block: [],
+        line: []
+    };
+
+    var source = espree.parse(content, {
+        range: true,
+        comments: true,
+        attachComment: true
+    });
+
+    var comments = source.comments;
+
+    if (comments.length) {
+        if (source.range[0] > comments[0].range[0]) {
+            res.first = comments.splice(0, 1);
+        }
+
+        comments.forEach(function (c) {
+            if (c.type === 'Block') {
+                res.block.push(c);
+            } else if (c.type === 'Line') {
+                res.line.push(c);
+            }
+        });
+    }
+
+    return res;
 };
 
 module.exports = function (content, type, opts) {
@@ -24,36 +56,20 @@ module.exports = function (content, type, opts) {
         return !!t && allowedType.indexOf(t) > -1 ? true : false;
     });
 
-    opts = extend({}, options, opts || {});
+    var rule = parseComments(content);
 
-    function filter(type, content) {
-
-        if (!(type in extractComments))
-            return content;
-
-        var start = 0,
-            end = 0,
-            _C = [];
-
-        extractComments[type](content).forEach(function (comment) {
-            end = comment.loc.start.pos;
-            start !== end && _C.push(content.slice(start, end));
-            start = comment.loc.end.pos;
-        });
-
-        _C.push(content.slice(start));
-
-        return _C.join('');
-    }
-
-    content = content.replace(/\r\n|\r/g, '\n');
-
-    type.forEach(function (type) {
-        content = filter(type, content);
+    type.forEach(function (t) {
+        if (rule[t].length) {
+            rule[t].forEach(function (c) {
+                content = content.slice(0, c.range[0]) + ' '.repeat(c.range[1] - c.range[0]) + content.slice(c.range[1]);
+            });
+        }
     });
+
+    opts = extend({}, options, opts || {});
 
     return opts.beautify
         // remove empty line, strip multi-line
-        ? content.replace(/[\x20\t]+(\n)/g, '$1').replace(/\n+/g, '\n\n').replace(/^\n+/, '\n')
+        ? content.replace(/[\s]+(\n)/g, '$1').replace(/\n+/g, '\n\n').replace(/^\n+/, '\n')
         : content;
 };

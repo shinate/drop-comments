@@ -21,7 +21,7 @@ var options = {
     // Sector configuration
 
     /**
-     * Sector
+     * Sector'
      *
      * Integer or Array
      *

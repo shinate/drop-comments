@@ -1,6 +1,6 @@
 {
   "name": "drop-comments",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "remove comments from file/string",
   "main": "index.js",
   "repository": {
@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/shinate/drop-comments#readme",
   "dependencies": {
-    "extend-object": "^1.0.0",
-    "extract-comments": "^0.8.6"
+    "espree": "^2.2.5",
+    "extend-object": "^1.0.0"
   },
   "devDependencies": {
     "fs": "0.0.2",
-    "strip-comments": "^0.4.1"
+    "strip-comments": "^0.4.3"
   }
 }
