@@ -1,7 +1,7 @@
 'use strict';
 
 var extractComments = require('extract-comments');
-var extend = require('./lib/core/obj/extend');
+var extend = require('extend-object');
 
 var allowedType = ['block', 'line'];
 
