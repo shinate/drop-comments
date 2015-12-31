@@ -11,6 +11,10 @@ var options = {
 
 module.exports = function (content, type, opts) {
 
+    if (content == null) {
+        return '';
+    }
+
     if (!type)
         type = allowedType;
     else if (!(type instanceof Array))
